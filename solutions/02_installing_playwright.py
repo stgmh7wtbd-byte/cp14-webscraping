@@ -6,10 +6,20 @@ clear_screen()
 # ============================
 
 '''
-In the terminal, run:
+FIRST:
+In the terminal, run one of these to install playwright:
     pip install playwright
-then, run this:
+    py -m pip install playwright
+    pip3 install playwright
+    python -m pip install playwright
+    python3 -m pip install playwright
+    
+SECOND:
+In the terminal, run one of these to have playwright install web browsers on your computer:
     playwright install
+    py -m playwright install
+    python -m playwright install
+    python3 -m playwright install
 '''
 
 from playwright.sync_api import sync_playwright

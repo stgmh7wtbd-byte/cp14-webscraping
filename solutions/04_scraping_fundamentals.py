@@ -95,22 +95,23 @@ with sync_playwright() as p:
     description_p = page.locator("div[id='product_description'] + p")
     print(description_p.text_content(), "\n")
 
+
     '''
 GRABBING CHILD AND SIBLING ELEMENTS
 -----------------------------------
 Child elements are elements nested in another element.
 Sibling elements are elements next to another element at the same level.
 
-page.locator("div p").all_text_contents()
+page.locator("div p")
     - get all child p elements of the div, even those nested several levels deep
 
-page.locator("div > p").all_text_contents()
+page.locator("div > p")
     - get all child p elements but only those nested one level deep
 
-page.locator("h3 + p").all_text_contents()
+page.locator("h3 + p")
     - get the sibling p element directly after the h3 element
 
-page.locator("h3 ~ p").all_text_contents()
+page.locator("h3 ~ p")
     - get all sibling p elements that are after the h3 element
     '''
 

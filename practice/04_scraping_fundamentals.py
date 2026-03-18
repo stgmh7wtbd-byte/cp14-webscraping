@@ -34,6 +34,11 @@ and alternative ways to do things, but to keep it simple we'll focus on these.
 # all the necessary data
 page_url = 'https://books.toscrape.com/catalogue/aladdin-and-his-wonderful-lamp_973/index.html'
 
+from playwright.sync_api import sync_playwright
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=False, slow_mo=3000) # getting the chromium browser
+    context = browser.new_context() # no shared cache/cookies in the chromium broswer
+    page = context.new_page() # load a new page using that new context
 
 
 # 2. GET CONTENT FROM THE PAGE: FIRST P
@@ -65,6 +70,27 @@ page_url = 'https://books.toscrape.com/catalogue/aladdin-and-his-wonderful-lamp_
 # grab the nested element after that. Try grabbing the table with a class of
 # "table table-striped" then the first tr inside the table, then the first td
 
+
+
+
+    '''
+GRABBING CHILD AND SIBLING ELEMENTS
+-----------------------------------
+Child elements are elements nested in another element.
+Sibling elements are elements next to another element at the same level.
+
+page.locator("div p")
+    - get all child p elements of the div, even those nested several levels deep
+
+page.locator("div > p")
+    - get all child p elements but only those nested one level deep
+
+page.locator("h3 + p")
+    - get the sibling p element directly after the h3 element
+
+page.locator("h3 ~ p")
+    - get all sibling p elements that are after the h3 element
+    '''
 
 # 6. GRAB THE VALUE OF AN ATTRIBUTE
 # Sometimes we want to grab data that is in the HTML attributes, not the content

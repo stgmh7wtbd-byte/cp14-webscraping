@@ -48,6 +48,7 @@ with sync_playwright() as p:
 
 
 '''
+
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=False, slow_mo=3000) # getting the chromium browser
     context = browser.new_context() # no shared cache/cookies in the chromium broswer
