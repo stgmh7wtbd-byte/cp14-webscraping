@@ -38,7 +38,49 @@ from playwright.sync_api import sync_playwright
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=False, slow_mo=3000) # getting the chromium browser
     context = browser.new_context() # no shared cache/cookies in the chromium broswer
-    page = context.new_page() # load a new page using that new context
+    page = context.new_page() # load a new page using that new context\
+
+    page.goto(page_url)
+
+    #grab the first p elements text
+    print(page.locator('p').nth(0).text_content())
+    #same thing but with .first
+    print(page.locator('p').first.text_content())
+
+    #tells how many p elements on the page 
+    num_p_elements = page.locator('p').count()
+
+    for n in range(num_p_elements):
+        print(f'Element # {n}: {page.locator('p').nth(n).text_content()}')
+
+    clear_screen()
+    print(page.locator("div[id='product_description']").text_content())
+
+    clear_screen()
+    print(page.locator("table[class='table table-striped'] td").nth(0).text_content())
+    
+    #same thing
+    print(page.locator("table[class='table table-striped']").locator("td").nth(0).text_content())
+
+    clear_screen()
+
+
+    #if u do a space after an element in locator, it finds the children elements, 
+    #if you do a + it will find an immeidate sibling element 
+    #find the div with that id, grab me the sibling p of that div (that comes after it)
+    print(page.locator("div[id='product_description'] + p").text_content())
+
+    clear_screen()
+
+    third_element_in_breadcrumb = page.locator('ul[class="breadcrumb"] a').nth(2)
+    print(third_element_in_breadcrumb)
+    print(third_element_in_breadcrumb.get_attribute('href'))
+    
+    third_element_in_breadcrumb.click()
+   
+    scraped_url = third_element_in_breadcrumb.get_attribute('href')
+    page.goto(f'https://books.toscrape.com/catalogue/category/{scraped_url}')
+
 
 
 # 2. GET CONTENT FROM THE PAGE: FIRST P
