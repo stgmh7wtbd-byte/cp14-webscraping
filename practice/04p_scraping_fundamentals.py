@@ -29,13 +29,14 @@ page_url = 'https://books.toscrape.com/catalogue/page-2.html'
 from playwright.sync_api import sync_playwright
 
 with sync_playwright() as p:
-    browser = p.chromium.launch(headless=False, slow_mo=250)
+    browser = p.chromium.launch(headless=False, slow_mo=0)
     context = browser.new_context()
     page = context.new_page()
 
     page.goto(page_url)
 
 
+#1.
+    #my attempt : print(page.locator("div[class= 'price_color']").first.text_content())
+    print(page.locator('p[class="price_color"]').first.text_content())
 
-
-    
